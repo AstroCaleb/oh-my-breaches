@@ -1,0 +1,26 @@
+.find-breaches-form {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 15px;
+    padding: 20px;
+}
+
+.find-breaches-form label {
+    font-weight: 200;
+    margin: 3px 0 5px;
+}
+
+.find-breaches-form input {
+    border: 1px solid #888;
+    border-radius: 30px;
+    max-width: 400px;
+    padding: 10px 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.find-breaches-form input::placeholder {
+    font-style: italic;
+}

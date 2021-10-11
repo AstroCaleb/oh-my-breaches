@@ -1,0 +1,41 @@
+.filter-breaches-form {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+
+.filter-breaches-form label {
+    font-weight: 200;
+    margin: 3px 0 5px;
+}
+
+.filter-breaches-form input {
+    border: 1px solid #888;
+    border-radius: 30px;
+    max-width: 400px;
+    padding: 10px 20px;
+    text-align: center;
+    width: 100%;
+}
+
+.filter-breaches-form input::placeholder {
+    font-style: italic;
+}
+
+tbody.highlight-breach-row {
+    background: #F1F1F1;
+}
+
+.details-row [id$="details-wrapper"] {
+    transform: translateY(-100%);
+    transition: 0.5s ease all;
+}
+
+.details-row [id$="details-wrapper"].show-content {
+    transform: translateY(0%);
+}
+.details-row [id$="details-wrapper"].show-content.close-content {
+    max-height: 0 !important;
+}

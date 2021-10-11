@@ -1,0 +1,74 @@
+.breach-details-section {
+    background: #25415A;
+    border-radius: 6px;
+    box-sizing: border-box;
+    color: #FFF;
+    margin: 0 auto  10px;
+    padding: 15px 25px 30px;
+    width: calc(100% - 20px);
+}
+
+.breach-details-section a {
+    border-bottom: 1px solid hsla(212, 38%, 92%, 0.3);
+    color: hsl(212, 49%, 92%);
+}
+
+.breach-details-section a:hover {
+    border-bottom: 1px solid hsla(212, 38%, 92%, 0.6);
+    padding-bottom: 2px;
+}
+
+.breach-details-section hr {
+    border-top: none;
+    border-bottom: 1px solid hsla(0deg, 0%, 100%, 0.5);
+    margin: 20px 0 25px;
+}
+
+.breach-details-section .breach-detail-description {
+    max-width: 900px;
+}
+
+.breach-details-section .details-heading {
+    align-items: center;
+    background: hsla(0deg, 0%, 100%, 0.12);
+    border-radius: 10px;
+    display: flex;
+    margin-bottom: 20px;
+    padding: 8px;
+}
+
+.breach-details-section .details-heading h1 {
+    margin: 0;
+}
+
+.breach-details-section .details-heading img {
+    background: hsla(0, 0%, 100%, 0.6);
+    padding: 10px;
+    border-radius: 6px;
+    margin-right: 15px;
+    max-height: 40px;
+}
+
+.breach-details-section .breach-details-data-wrapper {
+    display: flex;
+    padding: 0 15px;
+}
+
+.breach-details-section .breach-details-data-wrapper .breach-details-left {
+    width: 40%;
+}
+
+.breach-details-section .breach-details-data-wrapper .breach-details-right {
+    border-left: 1px solid hsla(0deg, 0%, 100%, 0.05);
+    box-sizing: border-box;
+    padding-left: 30px;
+    width: 60%;
+}
+
+.breach-details-section .breach-details-data-wrapper .data-item {
+    margin-bottom: 15px;
+}
+
+.breach-details-section .breach-details-data-wrapper .data-item h3 {
+    margin: 0;
+}
