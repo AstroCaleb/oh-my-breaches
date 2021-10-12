@@ -8,6 +8,7 @@ const BreachesTable = ({breaches}) => {
     const [loadingDetails, setLoadingDetails] = useState({'name': '', 'loading': false});
     const [closingDetails, setClosingDetails] = useState(false);
     const [filteredBreaches, setFilteredBreaches] = useState('');
+    const [activelyFiltering, setFiltering] = useState(false);
     let delayTimerFiltering;
 
     useEffect(() => {
@@ -63,6 +64,10 @@ const BreachesTable = ({breaches}) => {
 
     const filterBreaches = (e) => {
         let value = e.target.value;
+
+        // start filtering visual
+        setFiltering(true);
+
         clearTimeout(delayTimerFiltering);
         delayTimerFiltering = setTimeout(() => {
             if (value.length >= 3) {
@@ -70,6 +75,8 @@ const BreachesTable = ({breaches}) => {
             } else {
                 setFilteredBreaches('');
             }
+            // end filtering visual
+            setFiltering(false);
         }, 500);
     };
 
@@ -77,7 +84,7 @@ const BreachesTable = ({breaches}) => {
         <>
             {breaches.length ?
                 <>
-                    <form className="filter-breaches-form">
+                    <form className="search-form">
                         <label htmlFor="filter-breaches-input">Filter Breaches By Name</label>
                         <input
                             type="text"
@@ -87,6 +94,9 @@ const BreachesTable = ({breaches}) => {
                             placeholder="Type at least 3 characters"
                             onChange={(e) => filterBreaches(e)}
                         />
+                        {activelyFiltering ?
+                            <span className="infinite-spinner size-3x"></span>
+                        : null}
                     </form>
 
                     <table>
@@ -97,8 +107,7 @@ const BreachesTable = ({breaches}) => {
                                 <th scope="col">Domain</th>
                                 <th scope="col">Date</th>
                                 <th scope="col">Impact</th>
-                                <th scope="col">Impacted Users</th>
-                                <th scope="col"></th>
+                                <th scope="col" colSpan="2">Impacted Users</th>
                             </tr>
                         </thead>
                         {breaches.map((breach, index) =>
@@ -161,9 +170,7 @@ const BreachesTable = ({breaches}) => {
                         )}
                     </table>
                 </>
-                :
-                <span className="infinite-spinner size-4x"></span>
-            }
+            : null}
         </>
     );
 };

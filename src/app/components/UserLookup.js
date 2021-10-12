@@ -46,7 +46,7 @@ const UserLookup = () => {
     return (
         <>
             <form
-                className="find-breaches-form"
+                className="search-form"
                 onSubmit={(e) => formSubmit(e, lookupInfo)}
             >
                 <label htmlFor="find-breaches-input">Lookup Your Information</label>
@@ -59,28 +59,29 @@ const UserLookup = () => {
                     value={lookupInfo}
                     onChange={(e) => setLookupInfo(e.target.value)}
                 />
+                {activelySearching ?
+                    <span className="infinite-spinner size-3x"></span>
+                : null}
             </form>
 
-            {activelySearching ?
-                <span className="infinite-spinner size-8x"></span>
-            : null}
+            <section className="user-lookup-results">
+                {(!breachDetailsData) ?
+                    <h2>&uarr; Start a search &uarr;</h2>
+                : null}
 
-            {(breachDetailsData && breachDetailsData.length) ?
-                breachDetailsData.map((details, index) =>
-                    <BreachDetails
-                        key={index}
-                        details={details}
-                    />
-                )
-            : null}
+                {(breachDetailsData && breachDetailsData.length === 0) ?
+                    <h2>No results! 🎉</h2>
+                : null}
 
-            {(breachDetailsData && breachDetailsData.length === 0) ?
-                <h1>No results!</h1>
-            : null}
-
-            {(breachDetailsData && breachDetailsData.length < 0) ?
-                <h1>Uh oh, your data has been compromised</h1>
-            : null}
+                {(breachDetailsData && breachDetailsData.length) ?
+                    breachDetailsData.map((details, index) =>
+                        <BreachDetails
+                            key={index}
+                            details={details}
+                        />
+                    )
+                : null}
+            </section>
         </>
     );
 };

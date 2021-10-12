@@ -17,14 +17,32 @@ table td {
 
 table thead tr {
     background: #222;
+    box-shadow: 0 -2px 0 #FFF;
     color: #FFF;
     position: sticky;
-    top: 0;
+    top: 82px;
     z-index: 10;
+}
+
+table thead tr th:first-child {
+    border-radius: 6px 0 0 6px;
+}
+
+table thead tr th:last-child {
+    border-radius: 0 6px 6px 0;
 }
 
 table tbody tr {
     border-top: 1px solid #ddd;
+}
+
+table tbody:first-of-type tr {
+    border-top: none;
+}
+
+table tbody tr:hover {
+    background: #f8f8f8;
+    transition: 0.1s ease all;
 }
 
 table th {
@@ -32,7 +50,7 @@ table th {
 }
 
 table thead th {
-    vertical-align: bottom;
+    vertical-align: middle;
 }
 
 table caption + thead tr:first-child th,

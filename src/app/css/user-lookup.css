@@ -1,0 +1,14 @@
+.user-lookup-results {
+    background: #F9F9F9;
+    border-radius: 12px;
+    box-sizing: border-box;
+    border: 1px solid #C1C1C1;
+    padding: 25px 20px 20px;
+    width: 100%;
+}
+
+.user-lookup-results h2 {
+    font-weight: 300;
+    margin: 40px 0;
+    text-align: center;
+}

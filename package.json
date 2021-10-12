@@ -1,7 +1,7 @@
 {
     "name": "oh-my-breaches",
     "version": "1.0.0",
-    "description": "Find breaches and also see if you've been compromised",
+    "description": "Find breaches and also see if your data has been compromised",
     "author": "Caleb Dudley",
     "scripts": {
         "watch": "ENV=local webpack serve --mode development",
