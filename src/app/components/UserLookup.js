@@ -65,22 +65,28 @@ const UserLookup = () => {
             </form>
 
             <section className="user-lookup-results">
-                {(!breachDetailsData) ?
-                    <h2>&uarr; Start a search &uarr;</h2>
-                : null}
-
-                {(breachDetailsData && breachDetailsData.length === 0) ?
-                    <h2>No results! 🎉</h2>
-                : null}
-
-                {(breachDetailsData && breachDetailsData.length) ?
-                    breachDetailsData.map((details, index) =>
-                        <BreachDetails
-                            key={index}
-                            details={details}
-                        />
-                    )
-                : null}
+                {(breachDetailsData) ?
+                    <>
+                        {(breachDetailsData.length) ?
+                            breachDetailsData.map((details, index) =>
+                                <BreachDetails
+                                    key={index}
+                                    details={details}
+                                />
+                            )
+                            :
+                            <h2>No results! 🎉</h2>
+                        }
+                    </>
+                    :
+                    <>
+                        {(activelySearching) ?
+                            <h2><em>Searching</em></h2>
+                            :
+                            <h2>&uarr; Start a search &uarr;</h2>
+                        }
+                    </>
+                }
             </section>
         </>
     );
