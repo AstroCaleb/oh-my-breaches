@@ -4,10 +4,11 @@ import moment from 'moment';
 import BreachDetails from './BreachDetails'
 
 const BreachesTable = ({breaches}) => {
+    const initialBreachesList = [...breaches];
+    const [breachesList, setBreachesList] = useState([...breaches]);
     const [breachDetailsData, setBreachDetailsData] = useState(null);
     const [loadingDetails, setLoadingDetails] = useState({'name': '', 'loading': false});
     const [closingDetails, setClosingDetails] = useState(false);
-    const [filteredBreaches, setFilteredBreaches] = useState('');
     const [activelyFiltering, setFiltering] = useState(false);
     let delayTimerFiltering;
 
@@ -71,9 +72,13 @@ const BreachesTable = ({breaches}) => {
         clearTimeout(delayTimerFiltering);
         delayTimerFiltering = setTimeout(() => {
             if (value.length >= 3) {
-                setFilteredBreaches(value.toLocaleLowerCase());
-            } else {
-                setFilteredBreaches('');
+                const newList = initialBreachesList.filter((breach) => {
+                    return breach.Title.toLocaleLowerCase().indexOf(value) !== -1
+                });
+                setBreachesList(newList);
+            }
+            if (value === '') {
+                setBreachesList(initialBreachesList);
             }
             // end filtering visual
             setFiltering(false);
@@ -82,7 +87,7 @@ const BreachesTable = ({breaches}) => {
 
     return (
         <>
-            {breaches.length ?
+            {initialBreachesList.length ?
                 <>
                     <form className="search-form">
                         <label htmlFor="filter-breaches-input">Filter Breaches By Name</label>
@@ -110,13 +115,11 @@ const BreachesTable = ({breaches}) => {
                                 <th scope="col" colSpan="2">Impacted Users</th>
                             </tr>
                         </thead>
-                        {breaches.map((breach, index) =>
+                        {breachesList.map((breach, index) =>
                             <tbody
                                 key={index}
-                                className={`
-                                    ${(filteredBreaches.length && breach.Name.toLocaleLowerCase().indexOf(filteredBreaches) === -1) ? 'visuallyhidden' : ''}
-                                    ${(breachDetailsData && breachDetailsData.Name === breach.Name) ? 'highlight-breach-row' : ''}
-                                `}
+                                data-testid="list-tbody"
+                                className={(breachDetailsData && breachDetailsData.Name === breach.Name) ? 'highlight-breach-row' : ''}
                             >
                                 <tr>
                                     <td>{breach.Title}</td>

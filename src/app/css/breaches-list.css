@@ -1,4 +1,5 @@
-tbody.highlight-breach-row {
+tbody.highlight-breach-row,
+tbody.highlight-breach-row tr:hover {
     background: #F1F1F1;
 }
 

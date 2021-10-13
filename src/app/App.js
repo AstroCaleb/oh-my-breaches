@@ -73,7 +73,7 @@ const App = () => {
                         <p>This app lets you search breach data provided specifically by the <a href="https://haveibeenpwned.com/" target="_blank" rel="noreferrer">Have I Been Pwned</a> API. You can either lookup details of a breach listed here or search your own information for any place your data may have been compromised in a breach.</p>
                     </div>
 
-                    {!showUserLookup ?
+                    {(!showUserLookup && breaches.length) ?
                         <BreachesTable breaches={breaches} />
                     : null}
 

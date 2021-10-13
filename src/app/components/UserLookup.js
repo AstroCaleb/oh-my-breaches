@@ -93,7 +93,6 @@ const UserLookup = () => {
 };
 
 UserLookup.propTypes = {
-    breachDetailsData: PropTypes.array,
     lookupInfo: PropTypes.string,
 };
 

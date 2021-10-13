@@ -1,10 +1,18 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
+import { render, screen, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import App from '../app/App';
 
-test('Welcome text is rendered', () => {
-    render(<App />);
-    const welcomeElement = screen.queryByText(/Welcome/i);
-    expect(welcomeElement).toBeInTheDocument();
+beforeAll(() => {
+    require('whatwg-fetch');
+});
+
+afterEach(cleanup);
+
+describe('<App />', () => {
+    it('should render welcome text', () => {
+        render(<App />);
+        const welcomeText = screen.queryByText(/Welcome/i);
+        expect(welcomeText).toBeInTheDocument();
+    });
 });
