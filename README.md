@@ -27,9 +27,10 @@ npm run watch  # defaults to localhost:3000
 ```bash
 # Public - pop index.html right into a browser
 dist/
-├── app.bundle.js
+├── index.html
 ├── favicon.ico
-└── index.html
+├── app.bundle.js
+└── app.bundle.js.LICENSE.txt
 ```
 
 ```bash
