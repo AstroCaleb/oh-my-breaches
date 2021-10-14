@@ -2,7 +2,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const noop = require('noop-webpack-plugin');
 const path = require('path');
 const TerserPlugin = require('terser-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 let isLocalEnv = process.env.ENV === 'local';
 
@@ -57,15 +56,7 @@ module.exports = {
     optimization: {
         minimize: true,
         minimizer: [
-            isLocalEnv ? noop() : new TerserPlugin(),
-            isLocalEnv ? noop() : new UglifyJsPlugin({
-                uglifyOptions: {
-                    output: {
-                        comments: false,
-                        beautify: false
-                    }
-                },
-            }),
+            isLocalEnv ? noop() : new TerserPlugin()
         ],
     },
     devtool: 'cheap-module-source-map',
