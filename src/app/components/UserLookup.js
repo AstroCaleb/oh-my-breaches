@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 import BreachDetails from './BreachDetails'
 
 const UserLookup = () => {
@@ -17,7 +16,7 @@ const UserLookup = () => {
         setBreachDetails(null);
         setSearching(true);
 
-        fetch('https://misc.calebdudleydesign.com/hibp/', {
+        fetch('https://misc.calebdudleydesign.com/api/hibp.php', {
             method: 'POST',
             body: postData
         })
@@ -45,6 +44,16 @@ const UserLookup = () => {
 
     return (
         <>
+            <p
+                style={{
+                    color: '#7c2020',
+                    textAlign: 'center',
+                    marginBottom: '40px',
+                    fontStyle: 'oblique'
+                }}
+            >
+                Apologies, unfortunately I allowed my API key to expire.
+            </p>
             <form
                 className="search-form"
                 onSubmit={(e) => formSubmit(e, lookupInfo)}
@@ -90,10 +99,6 @@ const UserLookup = () => {
             </section>
         </>
     );
-};
-
-UserLookup.propTypes = {
-    lookupInfo: PropTypes.string,
 };
 
 export default UserLookup;

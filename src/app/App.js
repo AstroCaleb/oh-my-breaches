@@ -1,41 +1,47 @@
-import React, { useState, useEffect, Component } from 'react';
-import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
 import _ from 'lodash';
-
+import {
+    useQuery,
+    useMutation,
+    useQueryClient,
+    QueryClient,
+    QueryClientProvider,
+} from '@tanstack/react-query';
+import axios from 'axios';
 import BreachesTable from './components/BreachesTable';
 import UserLookup from './components/UserLookup';
 
 const App = () => {
-    const [performingInitialSearch, setInitialSearch] = useState(false);
+    const [searching, setIsSearching] = useState(false);
     const [error, setError] = useState(null);
     const [breaches, setBreaches] = useState([]);
     const [showUserLookup, setShowUserLookup] = useState(false);
     let appLayout = '';
 
+    const { data, isLoading, isError } = useQuery({
+        queryKey: ['breaches'],
+        queryFn: () => {
+            return axios.get('https://haveibeenpwned.com/api/v3/breaches')
+            .then((response) => response.data);
+        }
+    });
+
     useEffect(() => {
-        let postData = new FormData();
-        postData.append('url', 'v3/breaches/');
+        if (isLoading) {
+            setError(null);
+            setIsSearching(true);
+            return;
+        }
 
-        // visual for initial breaches search
-        setInitialSearch(true);
+        if (isError) {
+            setError(data);
+            setIsSearching(false);
+            return;
+        }
 
-        fetch('https://misc.calebdudleydesign.com/hibp/', {
-            method: 'POST',
-            body: postData
-        })
-        .then((response) => response.json())
-        .then(
-            (data) => {
-                const orderedBreaches = _.orderBy(data, 'BreachDate', 'desc');
-                setBreaches(orderedBreaches);
-            },
-            (error) => {
-                setError(data);
-            }
-        ).finally(() => {
-            setInitialSearch(false);
-        });
-    }, []);
+        setIsSearching(false);
+        setBreaches(_.orderBy(data, 'BreachDate', 'desc'));
+    }, [data, isLoading, isError]);
 
     if (error) {
         appLayout = (
@@ -64,7 +70,7 @@ const App = () => {
                 </header>
 
                 <section className="main">
-                    {performingInitialSearch ?
+                    {searching ?
                         <span className="infinite-spinner middle-page"></span>
                     : null}
 
@@ -86,14 +92,6 @@ const App = () => {
     }
 
     return appLayout;
-};
-
-App.defaultProps = {
-    breaches: [],
-};
-
-App.propTypes = {
-    breaches: PropTypes.array,
 };
 
 export default App;

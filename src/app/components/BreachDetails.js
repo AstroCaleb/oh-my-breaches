@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import moment from 'moment';
 
 const BreachDetails = ({details, closeBreachDetailsFn}) => {
@@ -63,10 +62,6 @@ const BreachDetails = ({details, closeBreachDetailsFn}) => {
             : null}
         </section>
     );
-};
-
-BreachDetails.propTypes = {
-    closeBreachDetailsFn: PropTypes.func,
 };
 
 export default BreachDetails;

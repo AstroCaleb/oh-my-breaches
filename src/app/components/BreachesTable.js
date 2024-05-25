@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import moment from 'moment';
 import BreachDetails from './BreachDetails'
 
@@ -44,10 +43,7 @@ const BreachesTable = ({breaches}) => {
         // Handle loading visual
         setLoadingDetails({'name': breachName, 'loading': true});
 
-        fetch('https://misc.calebdudleydesign.com/hibp/', {
-            method: 'POST',
-            body: postData
-        })
+        fetch(`https://haveibeenpwned.com/api/v3/breach/${breachName}`)
         .then((response) => response.json())
         .then((data) => {
             if (data.statusCode) {
@@ -176,15 +172,6 @@ const BreachesTable = ({breaches}) => {
             : null}
         </>
     );
-};
-
-BreachesTable.defaultProps = {
-    breaches: [],
-};
-
-BreachesTable.propTypes = {
-    breaches: PropTypes.array,
-    loadingDetails: PropTypes.object,
 };
 
 export default BreachesTable;
